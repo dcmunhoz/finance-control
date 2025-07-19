@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+
+  // Black
+  --black-1: #1b1b1b;
+  --black-2: #303030;
+  --black-3: #ededed;
+
+  // White
+  --white-1: #ffffff;
+
+  // Green
+  --green-1: #00b36a;
+  --green-2: #18ca7c;
+  --green-3: #eaffeb;
+
+  // Orange
+  --orange-1: #f38d22;
+  --orange-2: #ffa655;
+  --orange-3: #ffecde;
+
+  // Blue
+  --blue-1: #1f9dec;
+  --blue-2: #49b9ff;
+  --blue-3: #cbecff;
+
+  // Red
+  --red-1: #ff3b11;
+  --red-2: #ff6947;
+  --red-3: #ffd2c5;
+}
+
+html {
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body * {
+  font-size: 1rem;
+}
+
+html, body * {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.text-header {
+  font-size: 2em;
+  margin: 15px 0;
+}

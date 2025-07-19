@@ -1,0 +1,13 @@
+<button
+  [class.type-filled]="isType(typeEnum.Filled)"
+  [class.type-outlined]="isType(typeEnum.Outlined)"
+  [class.type-text]="isType(typeEnum.Text)"
+  [class.severity-primary]="isSeverity(severityEnum.Primary)"
+  [class.severity-success]="isSeverity(severityEnum.Success)"
+  [class.severity-warning]="isSeverity(severityEnum.Warning)"
+  [class.severity-info]="isSeverity(severityEnum.Info)"
+  [class.severity-danger]="isSeverity(severityEnum.Danger)"
+  (click)="onClick.emit()"
+>
+  {{ label() }}
+</button>
