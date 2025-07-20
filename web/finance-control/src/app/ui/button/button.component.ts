@@ -32,12 +32,12 @@ export class ButtonComponent {
 
   constructor() {}
 
-  protected isSeverity(comparasion: ButtonSeverity): boolean {
-    return comparasion == this.severity();
+  protected isSeverity(comparison: ButtonSeverity): boolean {
+    return comparison == this.severity();
   }
 
-  protected isType(comparasion: ButtonType): boolean {
-    return comparasion == this.type();
+  protected isType(comparison: ButtonType): boolean {
+    return comparison == this.type();
   }
 
 }

@@ -26,3 +26,22 @@
     <p-button label="Danger" type="text" severity="danger"></p-button>
   </div>
 </div>
+
+<div>
+  <h1 class="text-header">Inputs</h1>
+  <div>
+
+    <p-input type="text" invalid help="texto de ajuda para saber algo" label="testei demais" placeholder="lets teste" [(ngModel)]="inputTeste"></p-input> valor: {{ inputTeste() }}
+
+    <br />
+    <br />
+    <br />
+
+    <form [formGroup]="form">
+      <p-input type="password" formControlName="nome" ></p-input> valor form: {{ form.value.nome }}
+    </form>
+
+    <p-button label="log form"  (onClick)="onClickBotao()" ></p-button>
+
+  </div>
+</div>

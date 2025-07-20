@@ -1,0 +1,24 @@
+@if (label() !== '') {
+  <label
+    [for]="internalId()"
+    [class.invalid]="invalid()"
+  >
+    {{label()}}
+  </label>
+}
+
+<input
+  [class.disabled]="isDisabled"
+  [class.invalid]="invalid()"
+  [(ngModel)]="internalValue"
+  (focus)="touched()"
+  [disabled]="isDisabled"
+  [placeholder]="placeholder()"
+  [id]="internalId()"
+  [name]="internalId()"
+  [type]="type()"
+/>
+
+@if (help()) {
+  <span [class.invalid]="invalid()" >{{help()}}</span>
+}
