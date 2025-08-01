@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Identity/">
+    <Project Path="src\Identity.Api\Identity.Api.csproj" Type="Classic C#" />
+    <Project Path="src\Identity.Business\Identity.Business.csproj" Type="Classic C#" />
+    <Project Path="src\Identity.Data\Identity.Data.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Solution files/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+</Solution>
