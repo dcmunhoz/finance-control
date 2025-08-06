@@ -1,4 +1,6 @@
-using Identity.Business.Models;
+using Identity.Api.Contracts.Register;
+using Identity.Business.Users;
+using Identity.Business.Users.Services.UserService;
 using Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,22 +8,10 @@ namespace Identity.Api.Controllers;
 
 [Route("api/register/")]
 [ApiController]
-public class RegisterController (IdentityDbContext context) : ControllerBase
+public class RegisterController(IdentityDbContext context,
+                                UserService userService) : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult>  Register()
-    {
-        User user = new()
-        {
-            Id = Guid.NewGuid(),
-            Name = "NOme",
-            Email = "teste@teste.com",
-            Password = "12345"
-        };
-
-        await context.Users.AddAsync(user);
-        await context.SaveChangesAsync();
-        
-        return Ok(user);
-    }
+    [HttpPost]
+    public async Task<IActionResult> RegisterAsync(NewUserRequest request, CancellationToken cancellationToken)
+        => Ok(await userService.NewUserAsync(request.Name, request.Email, request.Password, cancellationToken));
 }

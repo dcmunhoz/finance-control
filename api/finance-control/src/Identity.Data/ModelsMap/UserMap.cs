@@ -1,4 +1,4 @@
-using Identity.Business.Models;
+using Identity.Business.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

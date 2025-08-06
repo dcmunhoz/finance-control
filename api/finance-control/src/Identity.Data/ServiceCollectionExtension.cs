@@ -1,3 +1,5 @@
+using Identity.Business.Users.Repository;
+using Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,15 @@ public static class ServiceCollectionExtension
             var connString = configuration.GetConnectionString("Default");
             op.UseNpgsql(connString);
         });
+
+        services.AddRepositories();
+        
+        return services;
+    }
+    
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IUserRepository, UserRepository>();
         
         return services;
     }

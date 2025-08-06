@@ -1,5 +1,5 @@
 using System.Reflection;
-using Identity.Business.Models;
+using Identity.Business.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Data;
