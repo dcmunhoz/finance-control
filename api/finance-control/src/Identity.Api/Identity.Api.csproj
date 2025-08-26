@@ -3,6 +3,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\Common.Contracts\Common.Contracts.csproj" />
       <ProjectReference Include="..\Identity.Data\Identity.Data.csproj" />
     </ItemGroup>
 </Project>

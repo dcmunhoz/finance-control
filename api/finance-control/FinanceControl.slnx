@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/BuildingBlocks/">
+    <Project Path="src\Common.Contracts\Common.Contracts.csproj" Type="Classic C#" />
+    <Project Path="src\Common.Security\Common.Security.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Identity/">
     <Project Path="src\Identity.Api\Identity.Api.csproj" Type="Classic C#" />
