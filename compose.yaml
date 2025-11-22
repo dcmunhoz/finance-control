@@ -1,0 +1,21 @@
+﻿services:
+#  identity.api:
+#    image: identity.api
+#    build:
+#      context: .
+#      dockerfile: src/Identity.Api/Dockerfile
+#
+  db-finance-control:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: db-finance-control
+    ports:
+      - '1433:1433'
+      - '1431:1431'
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Finance#dev0
+    volumes:
+      - db-finance-control:/var/opt/mssql
+
+volumes:
+  db-finance-control:
