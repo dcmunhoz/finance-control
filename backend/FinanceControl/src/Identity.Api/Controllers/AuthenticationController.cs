@@ -2,6 +2,7 @@ using BaseApi;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Application.Interfaces.Service;
 using Identity.Application.Requests.User;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace Identity.Api.Controllers;
 
@@ -21,5 +22,12 @@ public class AuthenticationController : ApiControllerBase
     {
         var result = await _userService.CreateAsync(request.Name, request.Email, request.Password, cancellationToken);
         return CreateResponseOnCreated(result, "/api/auth/login");
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request, CancellationToken cancellationToken)
+    {
+        var result = await _userService.LoginAsync(request.Email, request.Password, cancellationToken);
+        return CreateResponseOnPost(result);
     }
 }
