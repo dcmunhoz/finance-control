@@ -2,7 +2,9 @@ using BaseApi;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Application.Interfaces.Service;
 using Identity.Application.Requests.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
+using LoginRequest = Identity.Application.Requests.User.LoginRequest;
 
 namespace Identity.Api.Controllers;
 

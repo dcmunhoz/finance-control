@@ -30,7 +30,7 @@ public class UserService : IUserService
         return new UserRegisteredResponse(user.Id, user.Name, user.Email);
     }
 
-    public async Task<Result<User>> LoginAsync(string email, string password, CancellationToken cancellationToken)
+    public async Task<Result<UserAuthenticatedResponse>> LoginAsync(string email, string password, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByEmailAsync(email, cancellationToken);
         if (user is null)
@@ -40,6 +40,8 @@ public class UserService : IUserService
         if (user.Password != hashPassword)
             return Errors.User.InvalidPassword;
 
-        return user;
+        var token = TokenService.CreateToken(user);
+        
+        return new UserAuthenticatedResponse { Token = token, Name = user.Name, Email = user.Email };
     }
 }
