@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BaseApi\BaseApi.csproj" />
       <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
       <ProjectReference Include="..\Identity.Infra.Data\Identity.Infra.Data.csproj" />
       <ProjectReference Include="..\Results\Results.csproj" />
