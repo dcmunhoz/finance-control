@@ -1,5 +1,10 @@
 <Solution>
-  <Folder Name="/Identity/">
+  <Folder Name="/Building blocks/" />
+  <Folder Name="/Building blocks/Results/">
+    <Project Path="src\Results\Results.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Identity/">
     <Project Path="src\Identity.Api\Identity.Api.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Solution Items/">
