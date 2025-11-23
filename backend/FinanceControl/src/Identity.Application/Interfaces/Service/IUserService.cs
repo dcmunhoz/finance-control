@@ -1,9 +1,9 @@
-using Identity.Application.Models;
+using Identity.Application.Responses.User;
 using Results;
 
 namespace Identity.Application.Interfaces.Service;
 
 public interface IUserService
 {
-    Task<Result<User>> CreateAsync(string name, string email, string password, CancellationToken cancellationToken);
+    Task<Result<UserRegisteredResponse>> CreateAsync(string name, string email, string password, CancellationToken cancellationToken);
 }

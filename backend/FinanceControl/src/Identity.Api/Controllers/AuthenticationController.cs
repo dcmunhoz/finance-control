@@ -1,7 +1,7 @@
 using BaseApi;
-using Identity.Api.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Application.Interfaces.Service;
+using Identity.Application.Requests.User;
 
 namespace Identity.Api.Controllers;
 

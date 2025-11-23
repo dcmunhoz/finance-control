@@ -2,10 +2,10 @@ using Results;
 
 namespace Identity.Application.Errors;
 
-public partial class Error
+public static partial class Error
 {
     public static class User
     {
-        public static ResultError UserAlreadyExists => new ResultError("User ");
+        public static ResultError UserAlreadyExists => new("Já existe um usuário cadastrado com esse e-mail.");
     }
 }
