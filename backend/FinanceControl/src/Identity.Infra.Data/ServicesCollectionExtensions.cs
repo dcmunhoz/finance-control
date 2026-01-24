@@ -12,7 +12,7 @@ public static class ServicesCollectionExtensions
     {
         services.AddDbContext<IdentityContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("Identity"));
+            options.UseNpgsql(configuration.GetConnectionString("Identity"));
         });
         
         services.AddTransient<IUserRepository, UserRepository>();
