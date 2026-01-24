@@ -3,6 +3,9 @@
   <Folder Name="/Building blocks/BaseApi/">
     <Project Path="src\BaseApi\BaseApi.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/Building blocks/FC/">
+    <Project Path="src\FC.Domain\FC.Domain.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/Building blocks/Results/">
     <Project Path="src\Results\Results.csproj" Type="Classic C#" />
   </Folder>

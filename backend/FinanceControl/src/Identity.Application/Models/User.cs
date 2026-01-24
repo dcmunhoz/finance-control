@@ -1,11 +1,12 @@
-﻿namespace Identity.Application.Models;
+﻿using FC.Domain;
 
-public class User
+namespace Identity.Application.Models;
+
+public class User : Entity
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public string Name { get; private set; }
+    public string Email { get; private set; }
+    public string Password { get; private set; }
 
     public User(string name, 
                 string email, 

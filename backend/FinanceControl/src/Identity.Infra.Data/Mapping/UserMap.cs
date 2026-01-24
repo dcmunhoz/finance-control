@@ -12,12 +12,24 @@ public class UserMap : IEntityTypeConfiguration<User>
         
         builder.HasKey(x => x.Id);
         
-        builder.Property(x => x.Id).ValueGeneratedNever();
-
-        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.Id)
+            .HasColumnName("id")
+            .HasColumnType("uuid")
+            .ValueGeneratedNever();
         
-        builder.Property(x => x.Email).IsRequired();
+        builder.Property(x => x.Name)
+            .HasColumnName("name")
+            .HasColumnType("varchar")
+            .IsRequired();
         
-        builder.Property(x => x.Password).IsRequired();
+        builder.Property(x => x.Email)
+            .HasColumnName("email")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
+        builder.Property(x => x.Password)
+            .HasColumnName("password")
+            .HasColumnType("varchar")
+            .IsRequired();
     }
 }
