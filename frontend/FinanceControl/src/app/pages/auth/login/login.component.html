@@ -1,0 +1,26 @@
+<p-toast></p-toast>
+<div class="login-page">
+  <p-card [header]="'Login'">
+
+    <form [formGroup]="loginForm">
+      <div class="form-item-container">
+        <p-floatlabel variant="on">
+          <input type="text" id="email_label" pInputText pSize="small" fluid formControlName="email" />
+          <label for="email_label">E-mail</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="form-item-container">
+        <p-floatlabel variant="on">
+          <p-password size="small" id="password_label" [toggleMask]="true" fluid formControlName="password" />
+          <label for="password_label">Password</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="form-item-container">
+        <p-button label="Login" fluid (onClick)="login()"  ></p-button>
+      </div>
+    </form>
+
+  </p-card>
+</div>
