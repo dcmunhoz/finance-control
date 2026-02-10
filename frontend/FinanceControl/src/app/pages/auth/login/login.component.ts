@@ -26,7 +26,6 @@ export class Login {
   });
 
   protected login(): void {
-    console.log(this.loginForm.dirty, this.loginForm.touched, this.loginForm.invalid);
     if (this.loginForm.invalid) {
       this._messageService.add({ severity: 'error', summary: 'Invalid email or password', detail: 'Email or password is required' });
     }
