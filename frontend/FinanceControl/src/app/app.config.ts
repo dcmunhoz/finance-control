@@ -4,6 +4,7 @@ import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
 import {providePrimeNG} from 'primeng/config';
 import {definePreset} from '@primeuix/themes';
+import {provideConfigService} from './shared/services/config.provider';
 
 const financePreset = definePreset(Aura, {
   semantic: {
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
       theme:{
         preset: financePreset
       }
-    })
+    }),
+    provideConfigService()
   ]
 };
