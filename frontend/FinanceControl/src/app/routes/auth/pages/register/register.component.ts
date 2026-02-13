@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {CardModule} from 'primeng/card';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -11,12 +11,13 @@ import {Toast} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {RegisterUserRequest} from '../../services/types/requests/register-user.interface';
 import {Router} from '@angular/router';
+import {Loading} from '../../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast],
+  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast, Loading],
   providers: [MessageService]
 })
 export class Register {
@@ -24,6 +25,8 @@ export class Register {
   private _authService = inject(AuthService);
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
+
+  protected isLoading = signal(false);
 
   protected registerForm = this._fb.group({
     name: ['', Validators.required],
@@ -49,12 +52,13 @@ export class Register {
       password: <string>this.registerForm.value.password
     }
 
+    this.isLoading.set(true);
     this._authService.register(request)
     .subscribe({
       next: () => {
         this._router.navigate(['/login']);
       }
-    });
+    }).add(() => this.isLoading.set(false));
   }
 
   protected isInvalid(controlName: string): boolean {
