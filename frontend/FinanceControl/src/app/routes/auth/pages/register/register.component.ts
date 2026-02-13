@@ -2,21 +2,65 @@ import {Component, inject} from '@angular/core';
 import {CardModule} from 'primeng/card';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {AuthService} from '../../services/auth.service';
+import {Message, MessageModule} from 'primeng/message';
+import {Toast} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import {RegisterUserRequest} from '../../services/types/requests/register-user.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule]
+  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast],
+  providers: [MessageService]
 })
 export class Register {
+  private _messageService = inject(MessageService);
   private _authService = inject(AuthService);
+  private _fb = inject(FormBuilder);
+  private _router = inject(Router);
 
-  public register(): void {
-    this._authService.register();
+  protected registerForm = this._fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    password_confirmation: ['', Validators.required],
+  });
+
+  protected register(): void {
+    if (this.registerForm.invalid) {
+      this._messageService.add({ severity: 'error', summary: 'Opss...', detail: 'Todos os campos precisam ser preenchidos corretamente!' });
+      return;
+    }
+
+    if (this.registerForm.value.password !== this.registerForm.value.password_confirmation) {
+      this._messageService.add({ severity: 'error', summary: 'Opss...', detail: 'Senhas não correspondem!' });
+      return;
+    }
+
+    let request: RegisterUserRequest = {
+      name: <string>this.registerForm.value.name,
+      email: <string>this.registerForm.value.email,
+      password: <string>this.registerForm.value.password
+    }
+
+    this._authService.register(request)
+    .subscribe({
+      next: response => {
+        this._router.navigate(['/login']);
+      }
+    });
+  }
+
+  protected isInvalid(controlName: string): boolean {
+    let control = this.registerForm.get(controlName);
+    if (!control) return false;
+
+    return control.touched && control.invalid;
   }
 }

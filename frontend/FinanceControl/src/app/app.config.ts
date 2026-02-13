@@ -4,7 +4,10 @@ import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
 import {providePrimeNG} from 'primeng/config';
 import {definePreset} from '@primeuix/themes';
-import {provideConfigService} from './shared/services/config.provider';
+import {provideConfigService} from './shared/services/config/config.provider';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {globalErrorHandler} from './shared/interceptors/global-error.interceptor';
+import {MessageService} from 'primeng/api';
 
 const financePreset = definePreset(Aura, {
   semantic: {
@@ -35,6 +38,12 @@ export const appConfig: ApplicationConfig = {
         preset: financePreset
       }
     }),
-    provideConfigService()
+    MessageService,
+    provideConfigService(),
+    provideHttpClient(
+      withInterceptors([
+        globalErrorHandler,
+      ])
+    )
   ]
 };

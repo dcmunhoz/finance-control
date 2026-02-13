@@ -57,12 +57,12 @@ public class ApiControllerBase : ControllerBase
     private ProblemResponse CreateProblemResponse<T>(Result<T> result)
         => new ProblemResponse
         {
-            Name = "Ocorreram um ou mais erros ao processar sua requisição.",
+            Summary = "Ocorreram um ou mais erros ao processar sua requisição.",
             Message = result.Errors.Count > 1 ? string.Empty : result.Errors.First().Message,
             Details = result.Errors.Count > 1
                 ? result.Errors.Select(s => new ProblemDetailResponse
                 {
-                    Name = s.Message
+                    Summary = s.Message
                 }).ToArray() : []
         };
 }

@@ -1,37 +1,52 @@
+<p-toast></p-toast>
 <div class="register-page">
-  <p-card header="Register">
-    <form >
-      <div class="form-item-container">
-        <p-floatlabel variant="on">
-          <input type="text" id="name_label" pInputText pSize="small" fluid  />
-          <label for="name_label">Name</label>
-        </p-floatlabel>
-      </div>
+  <div class="register-container">
+    <p-card header="Register">
+      <form [formGroup]="registerForm" ]>
+        <div class="form-item-container">
+          <p-floatlabel variant="on">
+            <label for="name_label">Name</label>
+            <input type="text" id="name_label" pInputText pSize="small" [invalid]="isInvalid('name')" fluid formControlName="name" />
+          </p-floatlabel>
+          @if (isInvalid('name')) {
+            <p-message severity="error" variant="simple" size="small" >Nome deve ser preenchido corretamente.</p-message>
+          }
+        </div>
 
-      <div class="form-item-container">
-        <p-floatlabel variant="on">
-          <input type="text" id="email_label" pInputText pSize="small" fluid  />
-          <label for="email_label">E-mail</label>
-        </p-floatlabel>
-      </div>
+        <div class="form-item-container">
+          <p-floatlabel variant="on">
+            <label for="email_label">E-mail</label>
+            <input type="text" id="email_label" pInputText pSize="small" [invalid]="isInvalid('email')" ] fluid formControlName="email" />
+          </p-floatlabel>
+          @if (isInvalid('email')) {
+            <p-message severity="error" variant="simple" size="small" >E-mail deve ser preenchido corretamente.</p-message>
+          }
+        </div>
 
-      <div class="form-item-container">
-        <p-floatlabel variant="on">
-          <p-password size="small" id="password_label" [toggleMask]="true" fluid />
-          <label for="password_label">Password</label>
-        </p-floatlabel>
-      </div>
+        <div class="form-item-container">
+          <p-floatlabel variant="on">
+            <p-password size="small" id="password_label" [toggleMask]="true" [invalid]="isInvalid('password')" fluid formControlName="password"/>
+            <label for="password_label">Password</label>
+          </p-floatlabel>
+          @if (isInvalid('password')) {
+            <p-message severity="error" variant="simple" size="small" >Senha deve ser preenchida corretamente.</p-message>
+          }
+        </div>
 
-      <div class="form-item-container">
-        <p-floatlabel variant="on">
-          <p-password size="small" id="confirm_password_label" [toggleMask]="true" fluid />
-          <label for="confirm_password_label">Confirm password</label>
-        </p-floatlabel>
-      </div>
+        <div class="form-item-container">
+          <p-floatlabel variant="on">
+            <p-password size="small" id="confirm_password_label" [toggleMask]="true" [invalid]="isInvalid('password_confirmation')" fluid formControlName="password_confirmation" />
+            <label for="confirm_password_label">Confirm password</label>
+          </p-floatlabel>
+          @if (isInvalid('password_confirmation')) {
+            <p-message severity="error" variant="simple" size="small" >Senha deve ser preenchida corretamente.</p-message>
+          }
+        </div>
 
-      <div class="form-item-container">
-        <p-button label="Register" fluid (onClick)="register()" ></p-button>
-      </div>
-    </form>
-  </p-card>
+        <div class="form-item-container">
+          <p-button label="Register" fluid (onClick)="register()" ></p-button>
+        </div>
+      </form>
+    </p-card>
+  </div>
 </div>
