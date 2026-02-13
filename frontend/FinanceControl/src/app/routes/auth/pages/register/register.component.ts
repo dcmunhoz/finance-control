@@ -51,7 +51,7 @@ export class Register {
 
     this._authService.register(request)
     .subscribe({
-      next: response => {
+      next: () => {
         this._router.navigate(['/login']);
       }
     });

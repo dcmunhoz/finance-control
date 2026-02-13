@@ -2,7 +2,7 @@
 <div class="register-page">
   <div class="register-container">
     <p-card header="Register">
-      <form [formGroup]="registerForm" ]>
+      <form [formGroup]="registerForm" >
         <div class="form-item-container">
           <p-floatlabel variant="on">
             <label for="name_label">Name</label>
@@ -16,7 +16,7 @@
         <div class="form-item-container">
           <p-floatlabel variant="on">
             <label for="email_label">E-mail</label>
-            <input type="text" id="email_label" pInputText pSize="small" [invalid]="isInvalid('email')" ] fluid formControlName="email" />
+            <input type="text" id="email_label" pInputText pSize="small" [invalid]="isInvalid('email')" fluid formControlName="email" />
           </p-floatlabel>
           @if (isInvalid('email')) {
             <p-message severity="error" variant="simple" size="small" >E-mail deve ser preenchido corretamente.</p-message>
