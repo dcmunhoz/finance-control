@@ -8,7 +8,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {RouterLink} from '@angular/router';
-import {Message, MessageModule} from 'primeng/message';
+import {MessageModule} from 'primeng/message';
 import {AuthService} from '../../services/auth.service';
 import {LoginRequest} from '../../services/types/requests/login.interface';
 import {Loading} from '../../../../shared/components/loading/loading.component';
