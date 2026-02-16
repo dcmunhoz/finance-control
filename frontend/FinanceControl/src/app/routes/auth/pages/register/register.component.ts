@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, OnDestroy, signal} from '@angular/core';
 import {CardModule} from 'primeng/card';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -12,6 +12,7 @@ import {MessageService} from 'primeng/api';
 import {RegisterUserRequest} from '../../services/types/requests/register-user.interface';
 import {Router, RouterLink} from '@angular/router';
 import {Loading} from '../../../../shared/components/loading/loading.component';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -20,11 +21,13 @@ import {Loading} from '../../../../shared/components/loading/loading.component';
   imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast, Loading, RouterLink],
   providers: [MessageService]
 })
-export class Register {
+export class Register implements OnDestroy {
   private _messageService = inject(MessageService);
   private _authService = inject(AuthService);
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
+
+  private _destroy$ = new Subject<void>();
 
   protected isLoading = signal(false);
 
@@ -34,6 +37,11 @@ export class Register {
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
   });
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
 
   protected register(): void {
     if (this.registerForm.invalid) {
@@ -54,11 +62,12 @@ export class Register {
 
     this.isLoading.set(true);
     this._authService.register(request)
-    .subscribe({
-      next: () => {
-        this._router.navigate(['/login']);
-      }
-    }).add(() => this.isLoading.set(false));
+      .pipe(takeUntil(this._destroy$))
+      .subscribe({
+        next: () => {
+          this._router.navigate(['/login']);
+        }
+      }).add(() => this.isLoading.set(false));
   }
 
   protected isInvalid(controlName: string): boolean {

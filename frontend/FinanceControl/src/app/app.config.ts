@@ -8,6 +8,7 @@ import {provideConfigService} from './shared/services/config/config.provider';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {globalErrorHandler} from './shared/interceptors/global-error.interceptor';
 import {MessageService} from 'primeng/api';
+import {authorizationInterceptor} from './shared/interceptors/authorization.interceptor';
 
 const financePreset = definePreset(Aura, {
   semantic: {
@@ -42,7 +43,8 @@ export const appConfig: ApplicationConfig = {
     provideConfigService(),
     provideHttpClient(
       withInterceptors([
-        globalErrorHandler,
+        authorizationInterceptor,
+        globalErrorHandler
       ])
     )
   ]

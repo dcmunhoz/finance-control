@@ -7,7 +7,7 @@ export const globalErrorHandler: HttpInterceptorFn = (req, next) => {
     tap({
       error: (error: HttpErrorResponse) => {
         let errorResponse = error.error as ProblemResponse;
-        alert(errorResponse.summary);
+        console.log(errorResponse);
       },
     })
   );

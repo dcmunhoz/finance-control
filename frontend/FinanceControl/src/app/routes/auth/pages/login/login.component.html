@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="login-page">
   <p-card [header]="'Login'">
 
@@ -25,3 +26,7 @@
 
   </p-card>
 </div>
+
+@if (isLoading()) {
+  <app-loading />
+}
