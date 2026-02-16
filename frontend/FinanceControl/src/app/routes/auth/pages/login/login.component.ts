@@ -7,13 +7,14 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardModule, ButtonModule, InputTextModule, PasswordModule, FloatLabel, ReactiveFormsModule, ToastModule],
+  imports: [CardModule, ButtonModule, InputTextModule, PasswordModule, FloatLabel, ReactiveFormsModule, ToastModule, RouterLink],
   providers: [MessageService]
 })
 export class Login {

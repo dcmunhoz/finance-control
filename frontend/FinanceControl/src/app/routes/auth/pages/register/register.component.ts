@@ -10,14 +10,14 @@ import {Message, MessageModule} from 'primeng/message';
 import {Toast} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {RegisterUserRequest} from '../../services/types/requests/register-user.interface';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {Loading} from '../../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast, Loading],
+  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast, Loading, RouterLink],
   providers: [MessageService]
 })
 export class Register {
