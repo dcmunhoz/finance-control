@@ -1,0 +1,27 @@
+.host-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+
+  .page-content-container{
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+  }
+
+  .menu {
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #e4e4e4;
+
+    h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
+  }
+}

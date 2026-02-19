@@ -1,12 +1,16 @@
 import { Routes } from '@angular/router';
 import { Host } from './shared/components/host/host.component';
 import {AuthGuard} from './shared/guards/auth.guard';
+import {DASHBOARD_ROUTES} from './routes/dashboard/dashboard.rautes';
 
 export const routes: Routes = [
   {
     path: '',
     component: Host,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      ...DASHBOARD_ROUTES
+    ]
   },
   {
     path: 'auth',
