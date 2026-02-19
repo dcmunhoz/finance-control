@@ -7,7 +7,7 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {MessageModule} from 'primeng/message';
 import {AuthService} from '../../services/auth.service';
 import {LoginRequest} from '../../services/types/requests/login.interface';
@@ -27,6 +27,7 @@ export class Login implements OnDestroy {
   private readonly _fb: FormBuilder = inject(FormBuilder);
   private readonly _messageService: MessageService = inject(MessageService);
   private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
 
   private _destroy$ = new Subject<void>();
 
@@ -54,10 +55,10 @@ export class Login implements OnDestroy {
     this._authService.login(request)
       .pipe(takeUntil(this._destroy$))
       .subscribe({
-        next: response => {
-          console.log(response);
+        next: _ => {
+          this._router.navigate(['/']);
         },
-        error: error => {
+        error: _ => {
           this._messageService.add({ severity: 'error', summary: 'Usuário inválido.' });
         }
       }).add(() => this.isLoading.set(false));

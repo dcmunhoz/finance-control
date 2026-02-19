@@ -37,4 +37,8 @@ export class AuthService {
 
     return user.token;
   }
+
+  public isAuthenticated(): boolean {
+    return this.getUserToken() !== '';
+  }
 }
