@@ -1,13 +1,29 @@
-@import "primeicons/primeicons.css";
+:root {
+  // Colors
+  // Black
+  --primary-black: #303030;
+
+  // White
+  --primary-white: #fff;
+
+  // Gray
+  --primary-gray: #9a9a9a;
+  --light-gray: #e1e1e1;
+
+
+  // Misc
+  --primary-radius: 5px;
+}
+
 
 * {
   font-family: 'SF Pro', sans-serif;
   padding: 0;
   margin: 0;
+  color: var(--primary-black);
 }
 
 html, body {
-  display: inline-block;
   width: 100%;
   height: 100%;
 }

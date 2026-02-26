@@ -1,0 +1,18 @@
+.fc-button-container {
+  display: inline-block;
+
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: var(--primary-white);
+    border-radius: var(--primary-radius);
+    border-color: var(--primary-gray);
+    border-style: solid;
+    border-width: 1px;
+
+    transition: 150ms;
+    &:hover {
+      background-color: var(--light-gray);
+    }
+  }
+}
