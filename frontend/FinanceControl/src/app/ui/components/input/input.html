@@ -1,0 +1,27 @@
+<div
+  class="fc-input-container"
+  [class.has-errors]="hasErrors()"
+>
+  @if (label()) {
+    <label [for]="id()">{{label()}}</label>
+  }
+  <input
+    [class.disabled-state]="disabled()"
+    [id]="id()"
+    [name]="id()"
+    [placeholder]="placeholder()"
+    [type]="type()"
+    [disabled]="disabled()"
+    [ngModel]="value()"
+    (ngModelChange)="onNgModelChange($event)"
+    (focus)="onTouched()"
+  />
+  <div class="errors-container">
+    @if (hasErrors()) {
+        @for (error of errorMessages; track error) {
+          <small>{{error}}</small>
+        }
+    }
+  </div>
+
+</div>
