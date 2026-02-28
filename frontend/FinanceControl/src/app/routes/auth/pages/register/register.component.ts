@@ -1,28 +1,23 @@
 import {Component, inject, OnDestroy, signal} from '@angular/core';
-import {CardModule} from 'primeng/card';
-import {Button} from 'primeng/button';
-import {FloatLabel} from 'primeng/floatlabel';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {InputText} from 'primeng/inputtext';
-import {Password} from 'primeng/password';
+import {FormBuilder} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {Message, MessageModule} from 'primeng/message';
-import {Toast} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
 import {RegisterUserRequest} from '../../services/types/requests/register-user.interface';
 import {Router, RouterLink} from '@angular/router';
 import {Loading} from '../../../../shared/components/loading/loading.component';
 import {Subject, takeUntil} from 'rxjs';
+import {FCInput} from '../../../../ui/components/input/input';
+import {FCButton} from '../../../../ui/components/button/button';
+import {FCNotificationService} from '../../../../ui/services/notification-service';
+import {email, form, FormField, required, validate} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [CardModule, Button, FloatLabel, FormsModule, InputText, Password, ReactiveFormsModule, Message, MessageModule, Toast, Loading, RouterLink],
-  providers: [MessageService]
+  imports: [Loading, RouterLink, FCInput, FCButton, FormField]
 })
 export class Register implements OnDestroy {
-  private _messageService = inject(MessageService);
+  private _notificationService = inject(FCNotificationService);
   private _authService = inject(AuthService);
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
@@ -31,11 +26,30 @@ export class Register implements OnDestroy {
 
   protected isLoading = signal(false);
 
-  protected registerForm = this._fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    password_confirmation: ['', Validators.required],
+  private registerModel = signal<RegisterUserRequest>({
+    name: '',
+    password: '',
+    email: '',
+    confirmationPassword: ''
+  });
+
+  protected registerForm = form(this.registerModel, (path) => {
+    required(path.name, { message: "Nome deve ser informado!" });
+
+    required(path.email, { message: "E-mail deve ser informado!" });
+    email(path.email, { message: "E-mail inválido!" });
+
+    required(path.password, { message: "Senha deve ser informada!" });
+    required(path.confirmationPassword, { message: "Senha deve ser informada!" });
+    validate(path.confirmationPassword, ({ value, valueOf }) => {
+      if ((value() === '' || valueOf(path.password) === '') ||
+        (value() === valueOf(path.password))) return undefined;
+
+      return {
+        kind: 'passwordsNotMatch',
+        message: 'As senhas devem ser iguais!'
+      };
+    })
   });
 
   public ngOnDestroy(): void {
@@ -44,36 +58,23 @@ export class Register implements OnDestroy {
   }
 
   protected register(): void {
-    if (this.registerForm.invalid) {
-      this._messageService.add({ severity: 'error', summary: 'Opss...', detail: 'Todos os campos precisam ser preenchidos corretamente!' });
+    if (this.registerForm().invalid()) {
+      this._notificationService.error('Todos os campos precisam ser preenchidos corretamente!');
       return;
     }
 
-    if (this.registerForm.value.password !== this.registerForm.value.password_confirmation) {
-      this._messageService.add({ severity: 'error', summary: 'Opss...', detail: 'Senhas não correspondem!' });
+    if (this.registerForm().value().password !== this.registerForm().value().confirmationPassword) {
+      this._notificationService.error('Senhas não correspondem!');
       return;
-    }
-
-    let request: RegisterUserRequest = {
-      name: <string>this.registerForm.value.name,
-      email: <string>this.registerForm.value.email,
-      password: <string>this.registerForm.value.password
     }
 
     this.isLoading.set(true);
-    this._authService.register(request)
+    this._authService.register(this.registerForm().value())
       .pipe(takeUntil(this._destroy$))
       .subscribe({
         next: () => {
           this._router.navigate(['/login']);
         }
       }).add(() => this.isLoading.set(false));
-  }
-
-  protected isInvalid(controlName: string): boolean {
-    let control = this.registerForm.get(controlName);
-    if (!control) return false;
-
-    return control.touched && control.invalid;
   }
 }

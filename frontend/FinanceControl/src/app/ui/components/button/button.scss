@@ -1,9 +1,10 @@
 .fc-button-container {
-  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
 
   button {
+    width: 100%;
     padding: 10px 20px;
-    margin: 5px;
     background-color: var(--primary-white);
     border-radius: var(--primary-radius);
     border-color: var(--primary-gray);

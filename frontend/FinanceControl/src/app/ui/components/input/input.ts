@@ -70,6 +70,8 @@ export class FCInput implements ControlValueAccessor, FormValueControl<string> {
     let errors = Object.keys(this.ngControl.errors ?? []);
 
     return <boolean>this.ngControl.touched &&
+           !<boolean>this.ngControl.pristine &&
+           <boolean>this.ngControl.dirty &&
            errors.length > 0;
   }
 }
